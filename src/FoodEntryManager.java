@@ -191,9 +191,9 @@ public class FoodEntryManager {
      */
     public boolean isGoalMet() {
 	if (isBulking) {
-	    return totalCalories > dailyGoal;
+	    return totalCalories >= dailyGoal;
 	} else {
-	    return totalCalories < dailyGoal;
+	    return totalCalories <= dailyGoal;
 	}
     }
 
@@ -204,11 +204,7 @@ public class FoodEntryManager {
      * @return Difference between goal and current calories
      */
     public int getCaloriesRemaining() {
-	if (isBulking) {
-	    return dailyGoal - totalCalories; // need this many more
-	} else {
-	    return dailyGoal - totalCalories; // this many under goal
-	}
+	return dailyGoal - totalCalories;
     }
 
     /**

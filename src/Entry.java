@@ -10,19 +10,21 @@ public class Entry
 	private int totalCalories;
 	private int goal;
 	private boolean goalMet;
+	private boolean bulking;
 
 	// Class constructor
 	public Entry(int date, int totalCalories, int goal, boolean bulking) {
 		this.date = date;
 		this.totalCalories = totalCalories;
 		this.goal = goal;
+		this.bulking = bulking;
 
 		if (bulking)
 		{
-			this.goalMet = totalCalories > goal;
+			this.goalMet = totalCalories >= goal;
 		} else
 		{
-			this.goalMet = totalCalories < goal;
+			this.goalMet = totalCalories <= goal;
 		}
 	}
 
@@ -45,6 +47,11 @@ public class Entry
 	public boolean getGoalMet()
 	{
 		return this.goalMet;
+	}
+
+	public boolean isBulking()
+	{
+		return this.bulking;
 	}
 
 }

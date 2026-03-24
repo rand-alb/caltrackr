@@ -37,10 +37,15 @@ public class FoodParser
 
 				// split the line by commas, keep empty strings too
 				String[] parts = line.split(",", -1);
+				if (parts.length < 3) {
+					System.out.println("Skipping malformed line (not enough columns): " + line);
+					continue;
+				}
 				String name = parts[0].trim();
 				String category = parts[1].trim().toLowerCase();
 
-				// if calories column is empty, just use 0
+				try {
+					// if calories column is empty, just use 0
 				int calories = !parts[2].trim().isEmpty() ? Integer.parseInt(parts[2].trim()) : 0;
 
 				// pick what kind of Food to make based on the category
@@ -49,6 +54,10 @@ public class FoodParser
 				case "fruit":
 				case "vegetable":
 				{
+					if (parts.length < 7) {
+						System.out.println("Skipping malformed fruit/veg line: " + line);
+						break;
+					}
 					int natSugar = !parts[3].trim().isEmpty() ? Integer.parseInt(parts[3].trim()) : 0;
 					boolean vitaminRich = !parts[4].trim().isEmpty() && Boolean.parseBoolean(parts[4].trim());
 					// vitamins are separated by | so split that, or empty array if none
@@ -63,6 +72,10 @@ public class FoodParser
 				}
 				case "meat":
 				{
+					if (parts.length < 10) {
+						System.out.println("Skipping malformed meat line: " + line);
+						break;
+					}
 					boolean redMeat = !parts[7].trim().isEmpty() && Boolean.parseBoolean(parts[7].trim());
 					int protein = !parts[8].trim().isEmpty() ? Integer.parseInt(parts[8].trim()) : 0;
 					int natFat = !parts[9].trim().isEmpty() ? Integer.parseInt(parts[9].trim()) : 0;
@@ -74,6 +87,10 @@ public class FoodParser
 				}
 				case "otherfood":
 				{
+					if (parts.length < 12) {
+						System.out.println("Skipping malformed otherfood line: " + line);
+						break;
+					}
 					int carbs = !parts[7].trim().isEmpty() ? Integer.parseInt(parts[7].trim()) : 0;
 					int fat = !parts[10].trim().isEmpty() ? Integer.parseInt(parts[10].trim()) : 0;
 					int sugar = !parts[11].trim().isEmpty() ? Integer.parseInt(parts[11].trim()) : 0;
@@ -86,6 +103,9 @@ public class FoodParser
 				default:
 					// if the category isn't one we know, just mention it and skip
 					System.out.println("Skipping unknown category: " + category);
+				}
+				} catch (NumberFormatException e) {
+					System.out.println("Skipping line due to numerical parsing error: " + line);
 				}
 			}
 		}

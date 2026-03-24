@@ -189,7 +189,8 @@ public class TrackingPanel extends JPanel {
 	String diffText = difference >= 0 ? "+" + difference : "" + difference;
 	JLabel diffLabel = new JLabel("Difference: " + diffText + " kcal");
 	diffLabel.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 13));
-	diffLabel.setForeground(difference >= 0 ? new Color(178, 34, 34) : new Color(34, 139, 34));
+	boolean isGoodDifference = entry.isBulking() ? difference >= 0 : difference <= 0;
+	diffLabel.setForeground(isGoodDifference ? new Color(34, 139, 34) : new Color(178, 34, 34));
 
 	centerPanel.add(caloriesLabel);
 	centerPanel.add(diffLabel);
