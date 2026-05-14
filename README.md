@@ -59,6 +59,7 @@ Caltrackr/
 ```
 
 ## Authors
-Dorian Le
-Max Ginsberg
-Rand Albaroudi
+
+- [Maxim Ginsberg]
+- [Rand Albaroud] 
+- [Dorian Le]
